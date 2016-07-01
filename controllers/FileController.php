@@ -16,9 +16,20 @@ class FileController extends Controller
 {
     public $enableCsrfValidation = false;
 
-    public function behaviors()
+   public function behaviors()
     {
         return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'only' => ['index', 'filemanager', 'uploadmanager', 'upload', 'update', 'delete','resize','info'],
+                'rules' => [
+                    [
+                        'actions' => ['index', 'filemanager', 'uploadmanager', 'upload', 'update', 'delete','resize','info'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
